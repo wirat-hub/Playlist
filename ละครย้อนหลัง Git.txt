@@ -1,5 +1,5 @@
 {
- "name": "ละคร ORIGIN",
+ "name": "ละคร Github",
  "author": "",
  "info": "",
  "image": "https://media4.giphy.com/media/5ZYFKsDQV5y0cgsoin/giphy.gif",
