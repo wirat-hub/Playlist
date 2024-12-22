@@ -1,0 +1,122 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mooseven IPtv F&P</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            background-color: #f0f0f0;
+        }
+        .video-container {
+            width: 18%;
+            margin: 0.5%;
+            text-align: center;
+            background: #fff;
+            border-radius: 8px;
+            padding: 10px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .video-container h3 {
+            font-size: 14px;
+            margin: 10px 0;
+        }
+        .video-container button {
+            padding: 10px 15px;
+            background: #e63737;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .video-container button:hover {
+            background: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        // ข้อมูลวิดีโอ (ไฟล์ m3u8 และชื่อรายการ)
+        const videos = [
+            { name: "Digital-NBT", file: "https://edge2a.v2h-cdn.com/nbt/nbt.stream/playlist.m3u8" },
+            { name: "Digital-TPBS", file: "https://edge2a.v2h-cdn.com/tpbs/tpbs.stream/playlist.m3u8" },
+            { name: "Digital-ALTV", file: "https://edge2a.v2h-cdn.com/altv2/altv.stream/playlist.m3u8" },
+            { name: "Digital-CH5", file: "https://639bc5877c5fe.streamlock.net/tv5hdlive/tv5hdlive/playlist.m3u8" },
+            { name: "Digital-TSPORT", file: "https://edge6a.v2h-cdn.com/t_sport/t_sport.stream/playlist.m3u8" },
+            { name: "Digital-TPTV", file: "https://tv-live.tpchannel.org/live/tv_1080p.m3u8" },
+            { name: "Digital-TNN", file: "https://edge6a.v2h-cdn.com/tnn24/tnn24.stream/playlist.m3u8" },
+            { name: "Digital-JKN", file: "https://edge6a.v2h-cdn.com/jkn18/jkn18.stream/playlist.m3u8" },
+            { name: "Digital-NATION", file: "https://edge2a.v2h-cdn.com/nation_1/nation_1.stream/playlist.m3u8" },
+            { name: "Digital-WORKPOINT", file: "https://hls-nginx.v2h-cdn.com/hls/workpointmyStream.m3u8" },
+            { name: "Digital-TRUE4U", file: "https://hls-nginx.v2h-cdn.com/hls/true4umyStream.m3u8" },
+            { name: "Digital-GMM", file: "https://hls-nginx.v2h-cdn.com/hls/gmm25myStream.m3u8" },
+            { name: "Digital-CH8", file: "https://hls-nginx.v2h-cdn.com/hls/ch8myStream.m3u8" },
+            { name: "Digital-MONO", file: "https://hls-nginx.v2h-cdn.com/hls/MonomyStream.m3u8" },
+            { name: "Digital-MCOT", file: "https://live-org-01-cdn.mcot.net/mcothd1080p_edge/smil:mcothd1080p.smil/playlist.m3u8" },
+            { name: "Digital-ONE", file: "https://hls-nginx.v2h-cdn.com/hls/onemyStream.m3u8" },
+            { name: "Digital-THAIRATH", file: "https://hls-nginx.v2h-cdn.com/hls/thairathmyStream.m3u8" },
+            { name: "Digital-CH3", file: "https://hls-nginx.v2h-cdn.com/hls/ch3myStream.m3u8" },
+            { name: "Digital-AMARIN", file: "https://hls-nginx.v2h-cdn.com/hls/amarinmyStream.m3u8" },
+            { name: "Digital-CH7", file: "https://hls-nginx.v2h-cdn.com/hls/ch7myStream.m3u8" },
+            { name: "Digital-PPTV", file: "https://hls-nginx.v2h-cdn.com/hls/pptvmyStream.m3u8" },
+            { name: "Sport-EPL 1", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-CwcMfNvZnUSg7sEGcOPNaas/m3u8" },
+            { name: "Sport-EPL 2", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C32xx7uBEriGU6g5fSPcwqE/m3u8" },
+            { name: "Sport-EPL 3", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C_kSKpblM8ixrRNajck4_yo/m3u8" },
+            { name: "Sport-EPL 4", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C2K_UJ4HvJYIA1SoiWHZ-gc/m3u8" },
+            { name: "Sport-EPL 5", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C9s7xl2QzBva0vqfzFpn_wo/m3u8" },
+            { name: "Sport-TSP 1", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-CyajoCOujoENEH_GaH7vENQ/m3u8" },
+            { name: "Sport-TSP 2", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C-096J_XoEAl77x4BIQ2tks/m3u8" },
+            { name: "Sport-TSP 3", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C0d4LkS6xOcDfauDk1K_UOE/m3u8" },
+            { name: "Sport-TSP 4", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C-197QUy45K9hjytY08Ffo0/m3u8" },
+            { name: "Sport-TSP 5", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C_hZvG9kenvCfZ7ETOM7Uwo/m3u8" },
+            { name: "Sport-TSP 7", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C78gYLaLpRwrqH4fWKT-8k8/m3u8" },
+            { name: "Sport-BEIN 1", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C7egukqPqlpXKCE8bTTQeEI/m3u8" },
+            { name: "Sport-BEIN 2", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C3sM_DomWrZ5L55rJNULt4o/m3u8" },
+            { name: "Sport-BEIN 3", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C7OpMGA5k2X15lkgMVAAJSk/m3u8" },
+            { name: "Sport-SPOTV 1", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-CyXWIpVtgYVpNkyTWh5DRS4/m3u8" },
+            { name: "Sport-SPOTV 2", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C1eNV2qQ7CEZF0q0uztfW_8/m3u8" },
+            { name: "Sport-TNT  1", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C7VoaIKZKkKmZ-1aCBlhI64/m3u8" },
+            { name: "Sport-TNT  2", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C8V_fNMYNR3g7fkbUQjonGQ/m3u8" },
+            { name: "Sport-TNT  3", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C1I9vyth5qppq0ICfBlqOo8/m3u8" },
+            { name: "Sport-EURO  1", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C4qpnzBhSTKZFiZgypVzv1o/m3u8" },
+            { name: "Sport-EURO  2", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C-HSD5SlamfwnbjD2NEEuoE/m3u8" },
+            { name: "Sport-ARENA BOLA 1", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-C-cTpEzbdHiG1GkMMwyyWW0/m3u8" },
+            { name: "Sport-ARENA 1", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-CxGfKwvhDkC321G88tNIPMc/m3u8" },
+            { name: "Sport-ARENA 2", file: "https://googlestreamthai.sytes.net:443/play/GxoDmTpMBjIBEaf40ku-Cw41AlXCiC6wnn-wpTsAtIs/m3u8" },
+            { name: "Sport-", file: "000000000" },
+            { name: "000000000", file: "000000000" },
+            { name: "000000000", file: "000000000" },
+            
+            // เพิ่มข้อมูลรายการวิดีโอที่นี่
+            ...Array(0).fill({ name: "รอสักครู่", file: "default.m3u8" }) // ช่องว่างที่เหลือ
+        ];
+
+        // สร้าง HTML สำหรับแต่ละวิดีโอ
+        videos.forEach((video, index) => {
+            const container = document.createElement('div');
+            container.className = 'video-container';
+
+            const title = document.createElement('h3');
+            title.textContent = video.name;
+
+            const button = document.createElement('button');
+            button.textContent = "กดเล่น";
+            button.onclick = () => {
+                // เปิดหน้าเล่นวิดีโอ
+                window.location.href = `player.html?file=${encodeURIComponent(video.file)}&name=${encodeURIComponent(video.name)}`;
+            };
+
+            container.appendChild(title);
+            container.appendChild(button);
+            document.body.appendChild(container);
+        });
+    </script>
+</body>
+</html>
